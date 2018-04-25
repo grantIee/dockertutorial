@@ -1,0 +1,31 @@
+version: "3"
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: grantlee/get-started:part2
+    deploy:
+      replicas: 10
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:80"
+    networks:
+      - webnet
+networks:
+  webnet:
+
+
+#This will:
+
+#YAML USES SPACES NOT TABS 
+# - Pull the image specified from the registry
+# - Run 5 instances of that image as a service called web, limited each one to use,
+#   at most, 10% of the CPU (across all cores), and 50MB of RAM
+# - Restarts containers when fails
+# - Port 80 on the host to port 80 on the web
+# - Web containers should share port 80 through webnet
+# - Webnet should be default setttings
